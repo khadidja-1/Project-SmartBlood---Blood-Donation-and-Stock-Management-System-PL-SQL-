@@ -1,0 +1,39 @@
+Display all donors
+SELECT * FROM DONOR;
+
+Display all donation appointments
+SELECT * FROM DONATION_APPOINTMENT;
+
+List blood collections with date and location
+SELECT COLLECTION_ID, APPOINTMENT_ID, COLLECTION_DATE, LOCATION
+FROM BLOOD_COLLECTION;
+
+Display all laboratory tests
+SELECT * FROM LAB_TEST;
+
+Display all blood units
+SELECT * FROM BLOOD_UNIT;
+
+Display available blood stock
+SELECT *
+FROM BLOOD_STOCK
+WHERE STATUS = 'AVAILABLE';
+
+ List all hospitals
+SELECT * FROM HOSPITAL;
+
+ Display blood requests (request + hospital + blood unit)
+SELECT BR.REQUEST_ID, H.NAME AS HOSPITAL, BR.UNIT_ID, BR.STATUS
+FROM BLOOD_REQUEST BR
+JOIN HOSPITAL H ON BR.HOSPITAL_ID = H.HOSPITAL_ID;
+
+Display transfusions (patient + unit + date)
+SELECT T.TRANSFUSION_ID, T.PATIENT_NAME, T.TRANSFUSION_DATE,
+       BR.UNIT_ID
+FROM TRANSFUSION T
+JOIN BLOOD_REQUEST BR ON T.REQUEST_ID = BR.REQUEST_ID;
+
+ Advanced query: blood stock by blood group
+SELECT BLOOD_TYPE, COUNT(*) AS TOTAL_UNITS
+FROM BLOOD_UNIT
+GROUP BY BLOOD_TYPE;
