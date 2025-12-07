@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2025-12-07" agent="ChatGPT" version="20.5.3" type="device">
+  <diagram id="SmartBloodERD" name="ERD">
+    <mxGraphModel dx="1290" dy="800" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- DONOR -->
+        <mxCell id="donor" value="DONOR" style="shape=rectangle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="50" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- DONATION_APPOINTMENT -->
+        <mxCell id="appointment" value="DONATION_APPOINTMENT" style="shape=rectangle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="50" width="200" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge1" edge="1" source="donor" target="appointment" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- BLOOD_COLLECTION -->
+        <mxCell id="collection" value="BLOOD_COLLECTION" style="shape=rectangle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="50" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge2" edge="1" source="appointment" target="collection" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- LAB_TEST -->
+        <mxCell id="labtest" value="LAB_TEST" style="shape=rectangle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="150" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge3" edge="1" source="collection" target="labtest" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- BLOOD_UNIT -->
+        <mxCell id="unit" value="BLOOD_UNIT" style="shape=rectangle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="50" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge4" edge="1" source="collection" target="unit" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- BLOOD_STOCK -->
+        <mxCell id="stock" value="BLOOD_STOCK" style="shape=rectangle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="1100" y="50" width="160" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge5" edge="1" source="unit" target="stock" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- HOSPITAL -->
+        <mxCell id="hospital" value="HOSPITAL" style="shape=rectangle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="50" y="250" width="160" height="60" as="geometry"/>
+        </mxCell>
+
+        <!-- BLOOD_REQUEST -->
+        <mxCell id="request" value="BLOOD_REQUEST" style="shape=rectangle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="250" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge6" edge="1" source="hospital" target="request" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge7" edge="1" source="unit" target="request" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+        <!-- TRANSFUSION -->
+        <mxCell id="transfusion" value="TRANSFUSION" style="shape=rectangle;whiteSpace=wrap;rounded=1;" vertex="1" parent="1">
+          <mxGeometry x="600" y="250" width="180" height="60" as="geometry"/>
+        </mxCell>
+        <mxCell id="edge8" edge="1" source="request" target="transfusion" parent="1">
+          <mxGeometry relative="1" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
