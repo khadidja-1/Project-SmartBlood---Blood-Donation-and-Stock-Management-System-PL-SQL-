@@ -1,0 +1,62 @@
+View: Donor Information With Appointments
+CREATE OR REPLACE VIEW v_donor_appointments AS
+SELECT 
+    d.donor_id,
+    d.name,
+    d.blood_type,
+    a.appointment_id,
+    a.appointment_date,
+    a.status AS appointment_status
+FROM DONOR d
+LEFT JOIN DONATION_APPOINTMENT a
+    ON d.donor_id = a.donor_id;
+
+View: Blood Units with Collection Info
+CREATE OR REPLACE VIEW v_blood_units AS
+SELECT 
+    u.unit_id,
+    u.blood_type,
+    u.expiration_date,
+    c.collection_date,
+    c.location
+FROM BLOOD_UNIT u
+JOIN BLOOD_COLLECTION c
+    ON u.collection_id = c.collection_id;
+
+ View: Available Blood Stock
+CREATE OR REPLACE VIEW v_available_stock AS
+SELECT 
+    s.stock_id,
+    u.blood_type,
+    s.location,
+    s.status
+FROM BLOOD_STOCK s
+JOIN BLOOD_UNIT u
+    ON s.unit_id = u.unit_id
+WHERE s.status = 'AVAILABLE';
+
+ View: Blood Requests With Hospital Name
+CREATE OR REPLACE VIEW v_blood_requests AS
+SELECT 
+    r.request_id,
+    h.name AS hospital_name,
+    r.unit_id,
+    r.request_date,
+    r.status
+FROM BLOOD_REQUEST r
+JOIN HOSPITAL h 
+    ON r.hospital_id = h.hospital_id;
+
+View: Transfusion Details
+CREATE OR REPLACE VIEW v_transfusions AS
+SELECT 
+    t.transfusion_id,
+    t.patient_name,
+    t.transfusion_date,
+    r.unit_id,
+    h.name AS hospital_name
+FROM TRANSFUSION t
+JOIN BLOOD_REQUEST r 
+    ON t.request_id = r.request_id
+JOIN HOSPITAL h
+    ON r.hospital_id = h.hospital_id;
