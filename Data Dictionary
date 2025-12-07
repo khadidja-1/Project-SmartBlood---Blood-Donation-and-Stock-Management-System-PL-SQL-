@@ -1,0 +1,63 @@
+
+DONOR
+Column	Type	Constraints	Description
+donor_id	NUMBER(10)	PK	Unique donor identifier
+first_name	VARCHAR2(50)	NOT NULL	Donor first name
+last_name	VARCHAR2(50)	NOT NULL	Donor last name
+gender	VARCHAR2(10)	CHECK (gender IN ('Male','Female'))	Gender
+birth_date	DATE	NOT NULL	Age validation for donation
+phone	VARCHAR2(20)	UNIQUE	Contact number
+blood_type	VARCHAR2(5)	NULL	Known blood group
+registration_date	DATE	DEFAULT SYSDATE	Donor creation date
+DONATION_APPOINTMENT
+Column	Type	Constraints	Description
+appointment_id	NUMBER(10)	PK	
+donor_id	NUMBER(10)	FK REFERENCES DONOR	
+appointment_date	DATE	NOT NULL	
+status	VARCHAR2(20)	CHECK (status IN ('Pending','Approved','Completed','Canceled'))	
+BLOOD_COLLECTION
+Column	Type	Constraints	Description
+collection_id	NUMBER(10)	PK	
+appointment_id	NUMBER(10)	FK → DONATION_APPOINTMENT	
+collected_by	VARCHAR2(100)	NOT NULL	
+collection_date	DATE	NOT NULL	
+LAB_TEST
+Column	Type	Constraints	Description
+test_id	NUMBER(10)	PK	
+collection_id	NUMBER(10)	FK → BLOOD_COLLECTION	
+test_name	VARCHAR2(50)	NOT NULL	
+result	VARCHAR2(20)	CHECK (result IN ('Positive','Negative','N/A'))	
+test_date	DATE	NOT NULL	
+BLOOD_UNIT
+Column	Type	Constraints	Description
+unit_id	NUMBER(10)	PK	
+collection_id	NUMBER(10)	FK → BLOOD_COLLECTION	
+blood_type	VARCHAR2(5)	NOT NULL	
+expiration_date	DATE	NOT NULL	
+status	VARCHAR2(20)	CHECK (status IN ('Valid','Expired','Used','Discarded'))	
+BLOOD_STOCK
+Column	Type	Constraints	Description
+stock_id	NUMBER(10)	PK	
+unit_id	NUMBER(10)	FK → BLOOD_UNIT	
+location	VARCHAR2(50)	NOT NULL	
+storage_date	DATE	DEFAULT SYSDATE	
+HOSPITAL
+Column	Type	Constraints	Description
+hospital_id	NUMBER(10)	PK	
+name	VARCHAR2(100)	NOT NULL	
+address	VARCHAR2(200)	NOT NULL	
+phone	VARCHAR2(20)	NOT NULL	
+BLOOD_REQUEST
+Column	Type	Constraints	Description
+request_id	NUMBER(10)	PK	
+hospital_id	NUMBER(10)	FK → HOSPITAL	
+unit_id	NUMBER(10)	FK → BLOOD_UNIT	
+request_date	DATE	NOT NULL	
+status	VARCHAR2(20)	CHECK (status IN ('Pending','Approved','Rejected','Delivered'))	
+TRANSFUSION
+Column	Type	Constraints	Description
+transfusion_id	NUMBER(10)	PK	
+request_id	NUMBER(10)	FK → BLOOD_REQUEST	
+transfusion_date	DATE	NOT NULL	
+patient_name	VARCHAR2(100)	NOT NULL	
+outcome	VARCHAR2(50)	CHECK (outcome IN ('Successful','Complications'))
